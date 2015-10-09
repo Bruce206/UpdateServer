@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <div class="input-group ">
+                    <input type="text" ng-model="searchterm" class="form-control" placeholder="Suchen..." ng-change="search()">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-remove-sign" ng-click="clearSearch()" style="cursor: pointer;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Interne ID</th>
+                    <th>Gesamtwerkzeug ID</th>
+                    <th>Werkzeug ID</th>
+                    <th>Werzzeughalter ID</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="totaltool in totaltools.content">
+                        <td>{{$index+page*pagesize+1}}</td>
+                        <td>{{totaltool.id}}</td>
+                        <td>{{totaltool.totalToolId}}</td>
+                        <td>{{totaltool.tool.id}}</td>
+                        <td>{{totaltool.toolHolder.id}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pager">
+                    <li ng-class="{'disabled':page == 0}"><a ng-click="page != 0 && previousPage()">Previous</a></li>
+                    <li ng-class="{'disabled':page == totaltools.totalPages-1}"><a ng-click="page != totaltools.totalPages-1 && nextPage()">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

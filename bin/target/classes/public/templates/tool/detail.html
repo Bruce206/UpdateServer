@@ -1,0 +1,103 @@
+<style>
+.pager > li > a {
+    cursor: pointer;
+}
+
+.tableList {
+    list-style: none;
+    font-size: 12px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.row {
+    margin: 0;
+}
+
+td {
+    padding: 6px !important;
+}
+
+.list-group-item {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.panel-heading {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <tabset justified="true">
+                <tab heading="Werkzeug">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>ID </td>
+                            <td>{{tool.id}}</td>
+                        </tr>
+                        <tr>
+                            <td>SerialNo</td>
+                            <td>{{tool.toolId}}</td>
+                        </tr>
+                    </table>
+                </tab>
+                <tab heading="EPCIS-Eventlist">
+                    <div class="container-fluid">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <th>Type</th>
+                                        <th>Location</th>
+                                        <th>Time</th>
+                                        <th>EPC-List</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="event in tool.eventList | orderBy:event.value.eventTime" ng-mouseenter="hover = true" ng-mouseleave="hover=false">
+                                            <td>
+                                                <ul class="tableList">
+                                                    <li>
+                                                        {{event.name}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="tableList">
+                                                    <li>BizLoc: {{event.value.bizLocation.id}}</li>
+                                                    <li>ReadPoint: {{event.value.readPoint.id}}</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="tableList">
+                                                    <li>
+                                                        Event: {{event.value.eventTime | formatTimestamp}}
+                                                    </li>
+                                                    <li>
+                                                        Record: {{event.value.recordTime | formatTimestamp}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="tableList">
+                                                    <li ng-repeat="epc in event.value.epcList">
+                                                        {{epc[0].value}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr ng-show="tool.eventList.length == 0">
+                                            <td colspan="4">Keine Ergebnisse gefunden</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\security\SecurityConfiguration.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\AppController.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\AppService.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\CustomLocalDateTimeSerializer.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\LocalDateTimePersistenceConverter.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\App.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\Version.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\AppRepository.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\app\VersionRepository.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\security\MvcConfig.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\CustomLocalDateSerializer.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\CustomLocalDateDeserializer.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\AbstractTimestampEntity.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\CustomLocalDateTimeDeserializer.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\common\converters\LocalDatePersistenceConverter.java
+C:\javaworkspace\UpdateServer\src\main\java\de\eins\updateserver\Application.java

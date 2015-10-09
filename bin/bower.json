@@ -1,0 +1,20 @@
+{
+  "name": "SmarttoolCloud",
+  "version": "0.1",
+  "authors": [
+    "Bruss <bruss@eins-gmbh.de>"
+  ],
+  "description": "Smarttool Cloud",
+  "dependencies": {
+    "angular-bootstrap": "latest",
+    "angular": "latest",
+    "angular-resource": "latest",
+    "angular-route": "latest",
+	"angular-sanitize": "latest",
+    "bootstrap": "latest",
+    "jquery-ui": "latest",
+    "underscore": "latest",
+    "angular-ui-router": "latest",
+    "moment": "latest"
+  }
+}
