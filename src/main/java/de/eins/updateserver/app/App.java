@@ -21,18 +21,20 @@ public class App extends AbstractTimestampEntity {
 	/**
 	 * Internal database-id
 	 */
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	/**
 	 * Unique Tool-ID
 	 */
 	@Column(unique = true, nullable = false)
 	private String name;
-	
+
 	@OneToMany
 	List<Version> versions = new ArrayList<Version>();
+
+	private String updaterFilePath;
 
 	public Long getId() {
 		return id;
@@ -58,7 +60,12 @@ public class App extends AbstractTimestampEntity {
 		this.versions = versions;
 	}
 
-	
-	
+	public String getUpdaterFilePath() {
+		return updaterFilePath;
+	}
+
+	public void setUpdaterFilePath(String updaterFilePath) {
+		this.updaterFilePath = updaterFilePath;
+	}
 
 }

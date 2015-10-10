@@ -1,26 +1,29 @@
 <div style="width: 100%;">
-    <button class="btn btn-success pull-left corner-bottom-right" ng-click="save()">Save</button>
+    <button class="btn btn-success pull-left corner-bottom-right" ng-click="save()" ng-hide="app.id">Save</button>
     <button class="btn btn-danger pull-right corner-bottom-left" ui-sref="app">X</button>
 </div>
 </div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <h3>Applikation</h3>
+            <h3>{{app.name}}</h3>
             <br />
-            <div class="group">
+            <div class="group" ng-show="!app.id">
                 <input type="text" class="input" ng-model="app.name" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Name</label>
             </div>
-            <div class="group">
-                <input type="text" class="input" ng-model="comment" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>Kommentar</label>
-            </div>
         </div>
+    </div>
+    <div class="row" ng-show="app.id">
+        <div class="col-xs-12">
+            <h3>Updater</h3>
+            <span ng-show="app.updaterFilePath">Akuteller Updater: {{app.updaterFilePath}}<br /></span>
+            <button class="btn btn-primary corner-bottom-right" ngf-select="uploadUpdater($file)">Datei hochladen...</button>
+        </div>
+    </div>
+    <div class="row" ng-show="app.id">
         <div class="col-md-6">
             <h3>Versionen</h3>
             <table class="table table-bordered" ng-show="app">
@@ -44,9 +47,8 @@
                         <span class="bar"></span>
                         <label>Version</label>
                     </div>
-                    <button class="btn corner-top-left" ng-class="{'btn-danger':!newVersion.file.name, 'btn-success':newVersion && newVersion.file}" ngf-select ng-model="newVersion.file" name="file" ngf-max-size="128MB">Datei wählen</button>
+                    <button class="btn btn-info corner-top-left" ngf-select ng-model="newVersion.file" name="file" ngf-max-size="128MB">Datei wählen</button>
                     <span ng-show="newVersion.file">Gewählte Datei: {{newVersion.file.name}}</span>
-                     <progressbar max="100" value="progress" ng-show="progress"><span style="color:white; white-space:nowrap;">{{progress}} %</span></progressbar>
                     <br />
                     <button class="btn btn-primary corner-bottom-right" ng-click="commitVersion()">Version freigeben</button>
                 </form>
@@ -54,3 +56,6 @@
         </div>
     </div>
 </div>
+<progressbar max="100" value="progress" ng-show="progress" style="position: absolute; width: 100%; bottom: 0; margin-bottom: 0px; border-radius: 0px;">
+    <span style="color:white; white-space:nowrap;">{{progress}} %</span>
+</progressbar>

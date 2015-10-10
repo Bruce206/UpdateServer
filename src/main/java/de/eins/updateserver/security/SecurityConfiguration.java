@@ -12,18 +12,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 @Configuration
-@EnableWebMvcSecurity 
+@EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Value("${secured-backend.enabled:true}")
 	private boolean enabled;
-	
-	@Override 
+
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		if (enabled) {
 			http.csrf().disable();
-			
+
 			// @formatter:off
 			http.authorizeRequests()
 				.antMatchers("/bowerlib/**").permitAll()
@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.formLogin()
 				.loginPage("/login")
+				.defaultSuccessUrl("/", true)
 				.permitAll()
 				
 				.and()
@@ -52,9 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin").password("eins$gmbh").roles("ADMIN");
 	}
-	
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-       return new PropertySourcesPlaceholderConfigurer();
-    }
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 }

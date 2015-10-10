@@ -1,5 +1,6 @@
 package de.eins.updateserver.app;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,17 +8,18 @@ import javax.persistence.Id;
 
 import de.eins.updateserver.common.AbstractTimestampEntity;
 
-@Entity 
-public class Version extends AbstractTimestampEntity {
-	
+@Entity
+public class Version extends AbstractTimestampEntity implements Comparable<Version> {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String pathToJar;
+
+	@Column(nullable = false)
 	private String versionNumber;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -42,4 +44,8 @@ public class Version extends AbstractTimestampEntity {
 		this.versionNumber = versionNumber;
 	}
 
+	@Override
+	public int compareTo(Version version) {
+		return super.getCreated().compareTo(version.getCreated());
+	}
 }
