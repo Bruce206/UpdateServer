@@ -83,10 +83,12 @@ public class AppController {
 	public void getImage(@PathVariable Long id, ServletResponse response) throws IOException {
 		App app = appRepository.findOne(id);
 
-		File imageFile = new File(app.getImagePath());
-		byte[] byteArray = IOUtils.toByteArray(new FileInputStream(imageFile));
-		response.setContentType("image/png");
-		response.getOutputStream().write(byteArray);
+		if (app != null) {
+			File imageFile = new File(app.getImagePath());
+			byte[] byteArray = IOUtils.toByteArray(new FileInputStream(imageFile));
+			response.setContentType("image/png");
+			response.getOutputStream().write(byteArray);
+		}
 	}
 
 }
