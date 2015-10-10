@@ -2,7 +2,6 @@ package de.eins.updateserver.app;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,12 +65,6 @@ public class AppController {
 	@RequestMapping(value = "/{id}/updater")
 	public File getUpdater(@PathVariable Long id) throws IOException {
 		return appService.getUpdater(id);
-	}
-
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "/check/{name}/{version:.+}")
-	public List<File> getUpdater(@PathVariable String name, @PathVariable String version) throws IOException {
-		return appService.checkForUpdates(name, version);
 	}
 
 }

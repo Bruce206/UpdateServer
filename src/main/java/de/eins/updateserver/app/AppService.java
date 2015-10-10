@@ -2,15 +2,14 @@ package de.eins.updateserver.app;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -87,30 +86,27 @@ public class AppService {
 		return new File(appRepository.findOne(id).getUpdaterFilePath());
 	}
 
-	public List<File> checkForUpdates(String name, String version) {
-		App app = appRepository.findByName(name);
+	public boolean checkForUpdates(String appName, String version) {
+		App app = appRepository.findByName(appName);
 
-		if (app.getVersions().isEmpty()) {
-			return null;
+		if (app == null || app.getVersions().isEmpty()) {
+			return false;
 		}
 
 		Version latestVersion = getLatestVersion(app);
 
 		if (latestVersion == null) {
-			return null;
+			return false;
 		}
 
 		System.out.println(latestVersion.getVersionNumber());
 		System.out.println(version);
 
 		if (!latestVersion.getVersionNumber().equals(version)) {
-			List<File> files = new ArrayList<File>();
-			files.add(new File(latestVersion.getPathToJar()));
-			files.add(new File(app.getUpdaterFilePath()));
-			return files;
+			return true;
 		}
 
-		return null;
+		return false;
 	}
 
 	public Version getLatestVersion(App app) {
@@ -119,5 +115,32 @@ public class AppService {
 			return app.versions.get(app.versions.size() - 1);
 		}
 		return null;
+	}
+
+	public File getLatestApp(String appName) {
+		App app = appRepository.findByName(appName);
+
+		if (app == null || app.getVersions().isEmpty()) {
+			return null;
+		}
+
+		Version latestVersion = getLatestVersion(app);
+
+		if (latestVersion == null || latestVersion.getVersionNumber() == null) {
+			return null;
+		}
+
+		return new File(latestVersion.getPathToJar());
+
+	}
+
+	public File getUpdaterForApp(String appName) {
+		App app = appRepository.findByName(appName);
+
+		if (app == null || StringUtils.isEmpty(app.getUpdaterFilePath())) {
+			return null;
+		}
+
+		return new File(app.getUpdaterFilePath());
 	}
 }

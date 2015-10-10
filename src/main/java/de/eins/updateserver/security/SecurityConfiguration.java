@@ -28,6 +28,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			http.authorizeRequests()
 				.antMatchers("/bowerlib/**").permitAll()
 				.antMatchers("/theme/**").permitAll()
+				.antMatchers("/check/**").permitAll()
+				.antMatchers("/download/**").permitAll()
+				.antMatchers("/updater/**").permitAll()
 				.antMatchers("/**").hasRole("ADMIN")
 				
 				.anyRequest().authenticated()
