@@ -12,7 +12,7 @@ updservapp.controller('AppDetailCtrl', function($scope, $rootScope, app, App, $s
     $scope.save = function() {
         App.save($scope.app, function(data) {
             $rootScope.message = "Erfolgreich gespeichert!";
-            console.log(data);
+            $scope.$emit("appChanged");
             $state.transitionTo($state.current, {id: data.id}, { 
               reload: true, inherit: true, notify: true 
             });
