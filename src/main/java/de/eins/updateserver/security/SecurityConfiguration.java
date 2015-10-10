@@ -31,6 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/check/**").permitAll()
 				.antMatchers("/download/**").permitAll()
 				.antMatchers("/updater/**").permitAll()
+				.antMatchers("/api/app/*/image").permitAll()
+				.antMatchers("/").permitAll()
 				.antMatchers("/**").hasRole("ADMIN")
 				
 				.anyRequest().authenticated()
@@ -38,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/", true)
+				.defaultSuccessUrl("/admin/", true)
 				.permitAll()
 				
 				.and()

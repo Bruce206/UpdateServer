@@ -1,7 +1,6 @@
 updservapp.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-
         .state('app', {
         url: '/app',
         template: "<div ui-view />"

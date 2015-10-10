@@ -35,6 +35,10 @@ public class App extends AbstractTimestampEntity {
 	List<Version> versions = new ArrayList<Version>();
 
 	private String updaterFilePath;
+	private String imagePath;
+
+	@Column(columnDefinition = "text")
+	private String comment;
 
 	public Long getId() {
 		return id;
@@ -66,6 +70,22 @@ public class App extends AbstractTimestampEntity {
 
 	public void setUpdaterFilePath(String updaterFilePath) {
 		this.updaterFilePath = updaterFilePath;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

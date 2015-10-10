@@ -1,11 +1,10 @@
-<div style="width: 100%;">
-    <button class="btn btn-success pull-left corner-bottom-right" ng-click="save()" ng-hide="app.id">Save</button>
-    <button class="btn btn-danger pull-right corner-bottom-left" ui-sref="app">X</button>
-</div>
-</div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12">
+        <button class="btn btn-success pull-left corner-bottom-right" ng-click="save()">Save</button>
+        <button class="btn btn-danger pull-right corner-bottom-left" ui-sref="app">X</button>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
             <h3>{{app.name}}</h3>
             <br />
             <div class="group" ng-show="!app.id">
@@ -14,6 +13,15 @@
                 <span class="bar"></span>
                 <label>Name</label>
             </div>
+            <div class="group" ng-show="app.id">
+                <input type="text" class="input" ng-model="app.comment" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Beschreibung</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <img ng-src="/api/app/{{app.id}}/image" alt="Bild hochladen" class="pull-right" style="height: 200px;" ngf-select="uploadImage($file)"/>
         </div>
     </div>
     <div class="row" ng-show="app.id">

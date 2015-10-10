@@ -55,7 +55,24 @@ updservapp.controller('AppDetailCtrl', function($scope, $rootScope, app, App, $s
             delete $scope.newVersion;
             delete $scope.progress;
             $rootScope.message = "Updater erfolgreich hochgeladen";
-            $scope.$emit("appChanged");
+            $scope.app = App.get({id: app.id});
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            $scope.progress =  parseInt(100.0 * evt.loaded / evt.total);
+        });
+    };
+
+    $scope.uploadImage = function (file) {
+        $scope.progress = 0;
+        Upload.upload({
+            url: '/api/app/' + $scope.app.id + '/image',
+            method: 'POST',
+            data: {file: file}
+        }).then(function (resp) {
+            delete $scope.newVersion;
+            delete $scope.progress;
+            $rootScope.message = "Bild erfolgreich hochgeladen";
             $scope.app = App.get({id: app.id});
         }, function (resp) {
             console.log('Error status: ' + resp.status);

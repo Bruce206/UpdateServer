@@ -82,10 +82,12 @@ public class AppService {
 		appRepository.findOne(appid).setUpdaterFilePath(persistetUpdater.getAbsolutePath());
 	}
 
+	@Transactional
 	public File getUpdater(Long id) {
 		return new File(appRepository.findOne(id).getUpdaterFilePath());
 	}
 
+	@Transactional
 	public boolean checkForUpdates(String appName, String version) {
 		App app = appRepository.findByName(appName);
 
@@ -109,6 +111,7 @@ public class AppService {
 		return false;
 	}
 
+	@Transactional
 	public Version getLatestVersion(App app) {
 		if (!app.versions.isEmpty()) {
 			Collections.sort(app.versions);
@@ -117,7 +120,8 @@ public class AppService {
 		return null;
 	}
 
-	public File getLatestApp(String appName) {
+	@Transactional
+	public File getLatestVersionByApp(String appName) {
 		App app = appRepository.findByName(appName);
 
 		if (app == null || app.getVersions().isEmpty()) {
@@ -134,6 +138,7 @@ public class AppService {
 
 	}
 
+	@Transactional
 	public File getUpdaterForApp(String appName) {
 		App app = appRepository.findByName(appName);
 
@@ -142,5 +147,28 @@ public class AppService {
 		}
 
 		return new File(app.getUpdaterFilePath());
+	}
+
+	@Transactional
+	public void updateImage(Long appId, MultipartFile file) throws IllegalStateException, IOException {
+		// create app-dir if not exists
+		String path = filepath + "/files/" + appId;
+		File f = new File(path);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+
+		// get file extension of uploaded file
+		String fileType = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
+
+		File persistetUpdater = new File(path + "/image" + fileType);
+		file.transferTo(persistetUpdater);
+
+		appRepository.findOne(appId).setImagePath(persistetUpdater.getAbsolutePath());
+	}
+
+	@Transactional
+	public void updateApp(Long id, App app) {
+		appRepository.findOne(id).setComment(app.getComment());
 	}
 }
